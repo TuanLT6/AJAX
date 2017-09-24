@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section  scripts{
+    
+<script src="~/Scripts/Plugins/mustache.min.js"></script>
+<script src="~/Scripts/controller/homeController.js"></script>
+<script src="~/Scripts/Plugins/jquery.twbsPagination.min.js"></script>
+ }
+<div class="row">
+    <div class="col-lg-12">
+        <button id="btnAddnew" class="btn btn-success">Add Employee</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Salary</td>
+                    <td>Status</td>
+                    <td>#</td>
+                </tr>
+            </thead>
+            <tbody id="tblData"></tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="pagination" class="pagination">
+
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ID}}</td>
+        <td>{{Name}}</td>
+        @*<td>{{Salary}}</td>*@
+        <td><input type="number" class="txtSalary" data-id="{{ID}}" value="{{Salary}}" /></td>
+        <td>{{{Status}}}</td>
+        <td>
+        <button class="btn btn-primary btn-edit" data-id="{{ID}}">Edit</button>
+        <button class="btn btn-danger "data-id="{{ID}}">Delete</button>
+        </td>
+    </tr>
+</script>
+
+
+ <!-- Modal -->
+<div class="modal fade" id="modalAddUpdate" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/Update Employee</h4>
+            </div>
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group">
+                        <label for="txtName">Name:</label>
+                        <input type="text" class="form-control" id="txtName">
+                        <input type="hidden" id="hidID" value="0" />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSalary">Salary:</label>
+                        <input type="number" class="form-control" id="txtSalary">
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" id="ckStatus"> Active</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
