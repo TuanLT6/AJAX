@@ -121,5 +121,19 @@ namespace AjaxJquery.Controllers
                 message = message
             });
         }
+
+        public JsonResult GetDetail(int id) // int page,pagezSize phaan trang
+        {
+            var model = _context.Employees.Find(id);
+
+            return Json(new
+            {
+                //data = list,
+                data = model,
+         
+                Status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

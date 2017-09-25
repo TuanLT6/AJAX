@@ -31,7 +31,40 @@ var homeController = {
             homeController.saveData();
            
         });
+
+        $('.btn-edit').off('click').on('click', function () {
+            $('#modalAddUpdate').modal('show');
+            var id = $(this).data('id');
+            homeController.loadDetail(id);
+        });
     },
+
+    loadDetail : function(id){
+        $.ajax({
+            url: '/Home/GetDetail',
+            data: {
+                id: id
+            },
+            type: 'GET',
+            dataType: 'json',
+            success: function (rp) {
+                if (status == true) {
+                    var data = rp.data;
+                    $('#hidID').val(data.ID);
+                    $('#txtName').val(data.Name);
+                    $('txtSalary').val(data.Salary);
+                    $('#ckStatus').prop('checked', data.Status);
+                }
+                else {
+                    alert(rp.message);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    },
+
 
     resetForm : function(){  //  xóa tất cả control
         $('#hidID').val('0');
@@ -65,7 +98,7 @@ var homeController = {
                     homeController.loadData();
                 }
                 else {
-                    alert(rp.Message);
+                    alert(rp.message);
                 }
             },
             error: function (err) {
